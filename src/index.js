@@ -54,20 +54,22 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const history = this.state.history.slice(0, this.state.stepNumber + 1); // Clear "future history" if any moves are made after moving backwards to a previous move
     const current = history[history.length - 1];
-    const squares = current.squares.slice();
+    const squares = current.squares.slice(); // Copy current squares array to new squares array
     if (calculateWinner(squares) || squares[i]) {
+      // If game is over or square is already clicked, dont do anything.
       return;
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
-      history: history.concat([{ squares: squares }]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      history: history.concat([{ squares: squares }]), // Add move to game history
+      stepNumber: history.length, // Give number for the step
+      xIsNext: !this.state.xIsNext // Flip player turn
     });
   }
 
+  // Jump to certain point in game history
   jumpTo(step) {
     this.setState({ stepNumber: step, xIsNext: step % 2 === 0 });
   }
@@ -75,8 +77,9 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const winner = calculateWinner(current.squares); // Winner is either "X" or "O"
 
+    // View previous moves, game history
     const moves = history.map((step, move) => {
       const desc = move ? "Go to move #" + move : "Go to game start";
       return (
@@ -88,9 +91,9 @@ class Game extends React.Component {
 
     let status;
     if (winner) {
-      status = "Winner: " + winner;
+      status = "Winner: " + winner; // Show winner
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O"); // Show next player
     }
 
     return (
@@ -107,6 +110,7 @@ class Game extends React.Component {
   }
 }
 
+// Calculate winner of the game
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
