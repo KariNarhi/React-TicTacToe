@@ -56,7 +56,10 @@ class Game extends React.Component {
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1); // Clear "future history" if any moves are made after moving backwards to a previous move
     const current = history[history.length - 1];
+    // console.log(history);
+    // console.log(current);
     const squares = current.squares.slice(); // Copy current squares array to new squares array
+    // console.log(squares);
     if (calculateWinner(squares) || squares[i]) {
       // If game is over or square is already clicked, dont do anything.
       return;
