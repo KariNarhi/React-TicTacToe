@@ -3,7 +3,13 @@ body {
   margin: 20px;
 }
 
-ol, ul {
+html {
+  height: 100%;
+  background-color: cornsilk;
+}
+
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -43,8 +49,13 @@ ol, ul {
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .game-info {
   margin-left: 20px;
+}
+
+.game-status {
+  font-size: 20px;
 }
