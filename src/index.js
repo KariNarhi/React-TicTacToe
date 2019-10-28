@@ -116,6 +116,7 @@ class Game extends React.Component {
 // Calculate winner of the game
 function calculateWinner(squares) {
   const lines = [
+    // different possibilities for a 3x3 game board
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -125,8 +126,11 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
+  // Loop through all the possibilities
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
+    // If same player mark (X or O) is in three squares vertically, horizontally or in cross-axis, return that mark as winner
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
